@@ -46,7 +46,6 @@ sys	0m0.003s
 - a `C` compiler for the `C` version
 - `python` (2 or 3) for the `python` version
 - a `Fortran` compiler for the `Fortran` version (tested with `gfortran`)
-- `GNU parallel` for the benchmark scripts
 
 ## Compilation
 

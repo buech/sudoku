@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
 
 echo "Running C-solver..."
-time parallel ./solver {= 's/\./0/g' =} :::: top95.txt > /dev/null
+time cat top95.txt | sed 's/\./0/g' | xargs -L1 ./solver > /dev/null
 
 echo "Running Fortran-solver..."
-time parallel ./fsolver {= 's/\./0/g' =} :::: top95.txt > /dev/null
-
+time cat top95.txt | sed 's/\./0/g' | xargs -L1 ./fsolver > /dev/null
