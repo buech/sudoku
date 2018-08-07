@@ -4,16 +4,14 @@ FCFLAGS += -Wall -O3 -march=native
 
 all: c fort
 
-c: solver
+c: solver dumb
 
 fort: fsolver
-
-solver: solver.c
 
 fsolver: solver.f90
 	$(FC) $(FCFLAGS) -o $@ $<
 
 clean:
-	rm -f solver fsolver
+	rm -f solver fsolver dumb
 
 .PHONY: all clean
