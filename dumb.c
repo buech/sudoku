@@ -35,6 +35,7 @@ void printb(unsigned short n) {
       printf("0");
 }
 
+/*
 void print_pool(unsigned short *board) {
    for(int i = 0; i < 9; i++) {
       if(!(i % 3) && i)
@@ -48,6 +49,7 @@ void print_pool(unsigned short *board) {
    }
    putchar('\n');
 }
+*/
 
 void fill(unsigned short *pool, int *board) {
    for (int pos = 0; pos < 81; pos++) {
@@ -70,7 +72,7 @@ void fill(unsigned short *pool, int *board) {
          for (int j = col; j < col + 3; j++)
             valid |= 1 << (board[9 * i + j] - 1);
 
-      pool[pos] = ~valid & 0b111111111;
+      pool[pos] = ~valid & 0x1ff;
    }
 }
 
