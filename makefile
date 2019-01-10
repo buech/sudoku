@@ -1,17 +1,20 @@
-CFLAGS += -Wall -std=c99 -O3 -march=native
+CFLAGS += -Wall -Wextra -pedantic -std=c99 -O3 -march=native
 FC = gfortran
-FCFLAGS += -Wall -O3 -march=native
+FFLAGS += -Wall -Wextra -pedantic -std=f2003 -O3 -march=native
+
+CEXEC = solver dumb pretty_print
+FEXEC = fsolver
 
 all: c fort
 
-c: solver dumb
+c: $(CEXEC)
 
-fort: fsolver
+fort: $(FEXEC)
 
 fsolver: solver.f90
-	$(FC) $(FCFLAGS) -o $@ $<
+	$(FC) $(FFLAGS) -o $@ $<
 
 clean:
-	rm -f solver fsolver dumb
+	rm -f $(CEXEC) $(FEXEC)
 
 .PHONY: all clean
