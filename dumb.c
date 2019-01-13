@@ -24,19 +24,23 @@ void printb(unsigned short n) {
        i--;
    }
 
-   for(; i > 0; i--)
+   for (; i > 0; i--)
       printf("0");
 }
+*/
 
 /*
 void print_pool(unsigned short *board) {
-   for(int i = 0; i < 9; i++) {
-      if(!(i % 3) && i)
+   for (int i = 0; i < 9; i++) {
+      if (!(i % 3) && i)
          putchar('\n');
-      for(int k = 9 * i; k < 9 * (i+1); k++) {
-         if(!(k % 3))
+      for (int k = 9 * i; k < 9 * (i+1); k++) {
+         if (!(k % 3))
             putchar(' ');
-         board[k] ? printb(board[k]) : printf("         .");
+         if (board[k])
+            printb(board[k]);
+         else
+            printf("         .");
       }
       putchar('\n');
    }
@@ -154,26 +158,26 @@ int main(int argc, char *argv[]) {
 
    int board[81];
 
-   if(argc == 2) {
-      if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
+   if (argc == 2) {
+      if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
          usage(argv[0]);
          return EXIT_SUCCESS;
       }
       else {
-         if(strlen(argv[1]) < 81) {
+         if (strlen(argv[1]) < 81) {
             fputs("Error: The sudoku has too few fields\n", stderr);
             usage(argv[0]);
             return EXIT_FAILURE;
          }
          else {
-            if(strlen(argv[1]) > 81)
+            if (strlen(argv[1]) > 81)
                fputs("Warning: The sudoku has too many fields. Additional fields will be ignored.\n", stderr);
-            for(int i = 0; i < 81; ++i)
-               board[i] = (argv[1])[i] >= '1' && (argv[1])[i] <= '9' ? (argv[1])[i]-'0' : 0;
+            for (int i = 0; i < 81; ++i)
+               board[i] = argv[1][i] >= '1' && argv[1][i] <= '9' ? argv[1][i]-'0' : 0;
          }
       }
    }
-   else if(argc > 2) {
+   else if (argc > 2) {
       fputs("Error: Too many arguments\n", stderr);
       usage(argv[0]);
       return EXIT_FAILURE;
