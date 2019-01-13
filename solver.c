@@ -99,6 +99,7 @@ int main(int argc, char **argv) {
    }
 
    if (nsol) {
+      // DLX backend already prints all solutions on the way
       if (backend != DLX)
          print_board(board);
    } else {
