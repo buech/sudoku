@@ -98,7 +98,7 @@ subroutine usage(program_name)
 
    print *, "usage ", trim(program_name), " [-h] SUDOKU"
    print *
-   print *, "Sudoku solver in Fortran 90 using backtracking"
+   print *, "Sudoku solver in Fortran using backtracking"
    print *
    print *, "positional arguments:"
    print *, "  SUDOKU        Sudoku in the form of a continuous string read from"
