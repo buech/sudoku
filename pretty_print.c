@@ -1,8 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <getopt.h>
 
-void print_board(int *board) {
+#include "string_to_board.h"
+
+static void print_board(int *board) {
    for (int i = 0; i < 9; i++) {
       if (!(i % 3) && i)
          putchar('\n');
@@ -19,7 +23,7 @@ void print_board(int *board) {
    putchar('\n');
 }
 
-void usage(char *program_name) {
+static void usage(char *program_name) {
    printf(
 "usage: %s [-h] SUDOKU\n\n", program_name);
    puts(
@@ -31,41 +35,37 @@ void usage(char *program_name) {
 "                length of at least 81 characters, additional\n"
 "                characters are ignored\n"
 "optional arguments:\n"
-"  -h, --help    show this help message and exit"
+"  -h            show this help message and exit"
    );
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char **argv) {
+   int opt;
+   while ((opt = getopt(argc, argv, "h")) != -1) {
+      switch (opt) {
+         case 'h':
+            usage(argv[0]);
+            return EXIT_SUCCESS;
+
+         case '?':
+            return EXIT_FAILURE;
+      }
+   }
+   argc -= optind;
+   argv += optind - 1;
 
    int board[81];
-
-   if (argc == 2) {
-      if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
-         usage(argv[0]);
-         return EXIT_SUCCESS;
+   if (argc) {
+      int err = string_to_board(board, argv[1]);
+      if (err == 1) {
+         fputs("ERROR: The sudoku has too few fields\n", stderr);
+         return EXIT_FAILURE;
+      } else if (err == 2) {
+         fputs("WARNING: The sudoku has too many fields, additional fields will be ignored\n", stderr);
       }
-      else {
-         if (strlen(argv[1]) < 81) {
-            fputs("Error: The sudoku has too few fields\n", stderr);
-            usage(argv[0]);
-            return EXIT_FAILURE;
-         }
-         else {
-            if (strlen(argv[1]) > 81)
-               fputs("Warning: The sudoku has too many fields. Additional fields will be ignored.\n", stderr);
-            for (int i = 0; i < 81; ++i)
-               board[i] = argv[1][i] >= '1' && argv[1][i] <= '9' ? argv[1][i]-'0' : 0;
-         }
-      }
-   }
-   else if (argc > 2) {
-      fputs("Error: Too many arguments\n", stderr);
-      usage(argv[0]);
-      return EXIT_FAILURE;
-   }
-   else {
-      fputs("Error: Too few arguments\n", stderr);
-      usage(argv[0]);
+   } else {
+      // TODO: read from stdin
+      fputs("ERROR: Missing argument\n", stderr);
       return EXIT_FAILURE;
    }
 

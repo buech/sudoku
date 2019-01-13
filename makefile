@@ -25,6 +25,8 @@ c: solver
 
 solver: $(OBJ)
 
+pretty_print: string_to_board.o
+
 fort: $(FEXEC)
 
 $(FEXEC): solver.f90
