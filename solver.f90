@@ -1,13 +1,21 @@
+!subroutine print_board(board)
+!   implicit none
+!   integer, dimension(81), intent(in) :: board
+!
+!   print "(3 (' ', 3 i2))", board(1:27)
+!   print *
+!   print "(3 (' ', 3 i2))", board(28:54)
+!   print *
+!   print "(3 (' ', 3 i2))", board(55:81)
+!   print *
+!
+!end subroutine
+
 subroutine print_board(board)
    implicit none
    integer, dimension(81), intent(in) :: board
 
-   print "(3 (' ', 3 i2))", board(1:27)
-   print *
-   print "(3 (' ', 3 i2))", board(28:54)
-   print *
-   print "(3 (' ', 3 i2))", board(55:81)
-   print *
+   print "(81 i0)", board
 
 end subroutine
 
@@ -145,11 +153,11 @@ program solver
       stop 1
    end if
 
-   print *, "Input:"
-   call print_board(board)
+   !print *, "Input:"
+   !call print_board(board)
 
    if(search(board, 0)) then
-      print *, "Solution:"
+      !print *, "Solution:"
       call print_board(board)
    else
       print *, "The puzzle is not solvable!"
