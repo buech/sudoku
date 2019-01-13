@@ -8,13 +8,13 @@
 #include "string_to_board.h"
 #include "backends.h"
 
-void print_board(int *board) {
+static void print_board(int *board) {
    for (int i = 0; i < 81; i++)
       printf("%1d", board[i]);
    putchar('\n');
 }
 
-void usage(char *program_name) {
+static void usage(char *program_name) {
    printf(
 "usage: %s [-h] [-b BACKEND] SUDOKU\n\n", program_name);
    puts(
