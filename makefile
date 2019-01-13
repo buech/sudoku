@@ -25,7 +25,7 @@ c: solver
 
 solver: $(OBJ)
 
-pretty_print: string_to_board.o
+pretty_print: pretty_print.o string_to_board.o
 
 fort: $(FEXEC)
 
