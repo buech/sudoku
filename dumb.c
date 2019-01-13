@@ -5,19 +5,12 @@
 #include <stdint.h>
 
 void print_board(int *board) {
-   for(int i = 0; i < 9; i++) {
-      if(!(i % 3) && i)
-         putchar('\n');
-      for(int k = 9 * i; k < 9 * (i+1); k++) {
-         if(!(k % 3))
-            putchar(' ');
-         board[k] ? printf("%2i", board[k]) : printf(" .");
-      }
-      putchar('\n');
-   }
+   for (int i = 0; i < 81; i++)
+      printf("%1d", board[i]);
    putchar('\n');
 }
 
+/*
 void printb(unsigned short n) {
    printf(" ");
    int i = 9;
@@ -191,12 +184,8 @@ int main(int argc, char *argv[]) {
       return EXIT_FAILURE;
    }
 
-   puts("Input:");
-   print_board(board);
-
    search(board);
 
-   puts("Solution:");
    print_board(board);
 
    return EXIT_SUCCESS;

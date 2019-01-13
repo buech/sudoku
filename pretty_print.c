@@ -3,52 +3,24 @@
 #include <string.h>
 
 void print_board(int *board) {
-   for (int i = 0; i < 81; i++)
-      printf("%1d", board[i]);
-   putchar('\n');
-}
-
-int search(int *board, int pos) {
-   if(pos == 81)
-      return 1;
-
-   if(board[pos])
-      return search(board, pos+1);
-
-   int col = pos % 9;
-   int row = pos / 9;
-   unsigned short valid = 0;
-
-   for(int i = 0; i < 9; ++i) {
-      valid |= 1 << (board[9 * row + i] - 1);
-      valid |= 1 << (board[9 * i + col] - 1);
-   }
-
-   col = col / 3 * 3;
-   row = row / 3 * 3;
-
-   for(int i = row; i < row + 3; ++i)
-      for(int j = col; j < col + 3; ++j)
-         valid |= 1 << (board[9 * i + j] - 1);
-
-   valid = ~valid;
-
-   for(board[pos] = 1; board[pos] <= 9; board[pos]++, valid >>= 1) {
-      if(valid & 1) {
-         if(search(board, pos+1))
-            return 1;
+   for(int i = 0; i < 9; i++) {
+      if(!(i % 3) && i)
+         putchar('\n');
+      for(int k = 9 * i; k < 9 * (i+1); k++) {
+         if(!(k % 3))
+            putchar(' ');
+         board[k] ? printf("%2i", board[k]) : printf(" .");
       }
+      putchar('\n');
    }
-
-   board[pos] = 0;
-   return 0;
+   putchar('\n');
 }
 
 void usage(char *program_name) {
    printf(
 "usage: %s [-h] SUDOKU\n\n", program_name);
    puts(
-"Sudoku solver in C using backtracking\n\n"
+"Pretty printer for Sudokus in string format\n\n"
 
 "positional arguments:\n"
 "  SUDOKU        Sudoku in the form of a continuous string read from\n"
@@ -94,11 +66,7 @@ int main(int argc, char *argv[]) {
       return EXIT_FAILURE;
    }
 
-   if(search(board, 0)) {
-      print_board(board);
-   } else {
-      puts("The puzzle is not solvable!");
-   }
+   print_board(board);
 
    return EXIT_SUCCESS;
 }
