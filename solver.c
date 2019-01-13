@@ -49,8 +49,10 @@ int main(int argc, char **argv) {
                backend = BT;
             else if (!strcmp(optarg, "dumb"))
                backend = DUMB;
-            else
+            else {
+               printf("WARNING: Unknown backend %s, using dlx\n", optarg);
                backend = DLX;
+            }
             break;
 
          case 'h':
@@ -71,7 +73,7 @@ int main(int argc, char **argv) {
          fputs("ERROR: The sudoku has too few fields\n", stderr);
          return EXIT_FAILURE;
       } else if (err == 2) {
-         fputs("WARNING: The sudoku has too many fields. Additional fields will be ignored.\n", stderr);
+         fputs("WARNING: The sudoku has too many fields, additional fields will be ignored\n", stderr);
       }
    } else {
       // TODO: read from stdin
@@ -100,7 +102,7 @@ int main(int argc, char **argv) {
       if (backend != DLX)
          print_board(board);
    } else {
-      puts("Could not find a solution.");
+      puts("Could not find a solution");
    }
 
    return EXIT_SUCCESS;
