@@ -1,5 +1,5 @@
 CFLAGS += -Wall -Wextra -pedantic -std=c99 -O3 -march=native
-FC = gfortran
+FC ?= gfortran
 FFLAGS += -Wall -Wextra -pedantic -std=f2003 -O3 -march=native
 
 CDLX_DIR = ../cdlx

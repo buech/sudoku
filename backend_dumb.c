@@ -1,8 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-
 static void fill(unsigned short *pool, int *board) {
    for (int pos = 0; pos < 81; pos++) {
       if (board[pos])

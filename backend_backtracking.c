@@ -1,7 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 static int search(int *board, int pos) {
    if (pos == 81)
       return 1;
