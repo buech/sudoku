@@ -4,22 +4,33 @@ FFLAGS += -Wall -Wextra -pedantic -std=f2003 -O3 -march=native
 
 CDLX_DIR = ../cdlx
 CPPFLAGS += -I$(CDLX_DIR)
+CPPFLAGS += -MMD
 LDFLAGS += -L$(CDLX_DIR)
 LDLIBS += -lcdlx
 
-CEXEC = solver dumb pretty_print dlx_solver
 FEXEC = fsolver
 
-all: c fort
+SRC = solver.c string_to_board.c
+SRC += backend_dlx.c
+SRC += backend_backtracking.c
+SRC += backend_dumb.c
 
-c: $(CEXEC)
+OBJ := $(SRC:.c=.o)
+
+all: c fort pretty_print
+
+c: solver
+
+solver: $(OBJ)
 
 fort: $(FEXEC)
 
-fsolver: solver.f90
+$(FEXEC): solver.f90
 	$(FC) $(FFLAGS) -o $@ $<
 
+-include $(wildcard *.d)
+
 clean:
-	rm -f $(CEXEC) $(FEXEC)
+	rm -f *.o *.d $(FEXEC) solver pretty_print
 
 .PHONY: all clean
