@@ -67,18 +67,31 @@ int main(int argc, char **argv) {
    argv += optind - 1;
 
    int board[81];
+   int err = 0;
    if (argc) {
-      int err = string_to_board(board, argv[1]);
-      if (err == 1) {
-         fputs("ERROR: The sudoku has too few fields\n", stderr);
-         return EXIT_FAILURE;
-      } else if (err == 2) {
-         fputs("WARNING: The sudoku has too many fields, additional fields will be ignored\n", stderr);
-      }
+      err = string_to_board(board, argv[1]);
+      goto handle_err;
    } else {
-      // TODO: read from stdin
-      fputs("ERROR: Missing argument\n", stderr);
+      if (isatty(0)) {
+         fputs("ERROR: Missing argument\n", stderr);
+         return EXIT_FAILURE;
+      } else {
+         char buf[83];
+         int n;
+         n = read(0, buf, sizeof(buf));
+         buf[strlen(buf)-1] = '\0';
+
+         err = string_to_board(board, buf);
+         goto handle_err;
+      }
+   }
+
+handle_err:
+   if (err == 1) {
+      fputs("ERROR: The sudoku has too few fields\n", stderr);
       return EXIT_FAILURE;
+   } else if (err == 2) {
+      fputs("WARNING: The sudoku has too many fields, additional fields will be ignored\n", stderr);
    }
 
    // Number of solutions, though only DLX is able to find multiple solutions
