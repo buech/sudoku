@@ -5,3 +5,6 @@ time cat top95.txt | sed 's/\./0/g' | xargs -L1 ./solver > /dev/null
 
 printf "Running Fortran-solver...\n"
 time cat top95.txt | sed 's/\./0/g' | xargs -L1 ./fsolver > /dev/null
+
+printf "Running DLX-solver...\n"
+time cat top95.txt | sed 's/\./0/g' | xargs -L1 ./dlx_solver > /dev/null
