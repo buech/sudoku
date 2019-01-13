@@ -1,4 +1,4 @@
-FC ?= gfortran
+FC = gfortran
 
 CFLAGS += -Wall -Wextra -pedantic -std=c99 -O3 -march=native
 FFLAGS += -Wall -Wextra -pedantic -std=f2003 -O3 -march=native
