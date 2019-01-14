@@ -64,10 +64,10 @@ int main(int argc, char **argv) {
          fputs("ERROR: Missing argument\n", stderr);
          return EXIT_FAILURE;
       } else {
-         char buf[83];
+         char buf[82];
          int n;
          n = read(0, buf, sizeof(buf));
-         buf[strlen(buf)-1] = '\0';
+         buf[n-1] = '\0';
 
          err = string_to_board(board, buf);
          goto handle_err;
