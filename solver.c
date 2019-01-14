@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
             else if (!strcmp(optarg, "dumb"))
                backend = DUMB;
             else {
-               printf("WARNING: Unknown backend %s, using dlx\n", optarg);
+               fprintf(stderr, "WARNING: Unknown backend %s, using dlx\n", optarg);
                backend = DLX;
             }
             break;
