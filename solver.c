@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
       } else {
          char buf[82];
          int n;
-         n = read(0, buf, sizeof(buf));
+         n = fread(buf, sizeof(char), sizeof(buf), stdin);
          buf[n-1] = '\0';
 
          err = string_to_board(board, buf);
