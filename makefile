@@ -1,9 +1,9 @@
-CDLX_DIR = ../cdlx
+CDLXDIR ?= ../cdlx
 
 CFLAGS += -Wall -Wextra -pedantic -std=c99 -O3
-CPPFLAGS += -I$(CDLX_DIR)
+CPPFLAGS += -I$(CDLXDIR)
 CPPFLAGS += -MMD
-LDFLAGS += -L$(CDLX_DIR)
+LDFLAGS += -L$(CDLXDIR)
 LDLIBS += -lcdlx
 
 SRC = solver.c string_to_board.c
