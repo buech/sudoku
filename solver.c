@@ -27,7 +27,7 @@ static void usage(char *program_name) {
 "                characters are ignored\n"
 "optional arguments:\n"
 "  -h            Show this help message and exit\n"
-"  -b BACKEND    Backend (dlx/bt/dumb), default is dlx\n"
+"  -b BACKEND    Backend (dlx/bt/dumb), default is dlx"
    );
 }
 
