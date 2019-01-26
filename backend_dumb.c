@@ -1,3 +1,8 @@
+#ifdef DEBUG
+#include <stdio.h>
+#include <unistd.h>
+#endif
+
 static void fill(unsigned short *pool, int *board) {
    for (int pos = 0; pos < 81; pos++) {
       if (board[pos])
@@ -22,6 +27,42 @@ static void fill(unsigned short *pool, int *board) {
       pool[pos] = ~valid & 0x1ff;
    }
 }
+
+#ifdef DEBUG
+void print_bin(unsigned short n) {
+   printf(" ");
+   int i = 9;
+   while (n) {
+       if (n & 1)
+           printf("1");
+       else
+           printf("0");
+
+       n >>= 1;
+       i--;
+   }
+
+   for (; i > 0; i--)
+      printf("0");
+}
+
+void print_pool(unsigned short *board) {
+   for (int i = 0; i < 9; i++) {
+      if (!(i % 3) && i)
+         putchar('\n');
+      for (int k = 9 * i; k < 9 * (i+1); k++) {
+         if (!(k % 3))
+            putchar(' ');
+         if (board[k])
+            print_bin(board[k]);
+         else
+            printf("         .");
+      }
+      putchar('\n');
+   }
+   putchar('\n');
+}
+#endif
 
 static void cancel(unsigned short *pool, int pos, int digit) {
    int col = pos % 9;
@@ -74,6 +115,13 @@ int solve_dumb(int *board) {
    while (pos >= 0) {
       board[pos] = which_pot(pool[pos]) + 1;
       cancel(pool, pos, board[pos] - 1);
+
+#ifdef DEBUG
+      puts("Pool after canceling");
+      print_pool(pool);
+
+      usleep(500000);
+#endif
 
       pos = next_pos(pool);
    }
