@@ -31,12 +31,6 @@ static void usage(char *program_name) {
    );
 }
 
-enum Backend {
-   DLX,
-   BT,
-   DUMB
-};
-
 int main(int argc, char **argv) {
    int backend;
    int opt;
