@@ -100,9 +100,7 @@ static int next_pos(unsigned short *pool) {
 
 static int which_pot(unsigned short x) {
    int i;
-   unsigned short n;
-
-   for (i = 0, n=x; ~n & 1; i++, n >>= 1);
+   for (i = 0; ~x & 1; i++, x >>= 1);
 
    return i;
 }
