@@ -7,6 +7,7 @@
 #include "string_to_board.h"
 
 static void print_board(int *board) {
+   putchar('\n');
    for (int i = 0; i < 9; i++) {
       if (!(i % 3) && i)
          putchar('\n');
