@@ -15,8 +15,8 @@ static void print_board(int *board) {
 
 static void usage(char *program_name) {
    printf(
-"usage: %s [-h] [-b BACKEND] SUDOKU\n\n", program_name);
-   puts(
+"usage: %s [-h] [-b BACKEND] SUDOKU\n\n"
+
 "Sudoku solver in C with multiple backends\n\n"
 
 "positional arguments:\n"
@@ -26,8 +26,8 @@ static void usage(char *program_name) {
 "                characters are ignored\n"
 "optional arguments:\n"
 "  -h            Show this help message and exit\n"
-"  -b BACKEND    Backend (dlx/bt/dumb), default is dlx"
-   );
+"  -b BACKEND    Backend (dlx/bt/dumb), default is dlx\n"
+   ,program_name);
 }
 
 int main(int argc, char **argv) {

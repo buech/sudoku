@@ -26,8 +26,8 @@ static void print_board(int *board) {
 
 static void usage(char *program_name) {
    printf(
-"usage: %s [-h] SUDOKU\n\n", program_name);
-   puts(
+"usage: %s [-h] SUDOKU\n\n"
+
 "Pretty printer for Sudokus in string format\n\n"
 
 "positional arguments:\n"
@@ -36,8 +36,8 @@ static void usage(char *program_name) {
 "                length of at least 81 characters, additional\n"
 "                characters are ignored\n"
 "optional arguments:\n"
-"  -h            show this help message and exit"
-   );
+"  -h            show this help message and exit\n"
+   ,program_name);
 }
 
 int main(int argc, char **argv) {
