@@ -1,0 +1,68 @@
+.Dd January 18, 2019
+.Os
+.Dt SOLVER 1
+.Sh NAME
+.Nm solver
+.Nd Sudoku solver in C with multiple backends
+.Sh SYNOPSIS
+.Nm
+.Op Fl b Ar backend
+.Op Fl h
+.Op Fl p
+.Op Fl P
+.Ar sudoku
+.Sh DESCRIPTION
+The program
+.Nm
+solves 9x9 Sudokus using selectable backends. The argument
+.Ar sudoku
+is a string representation of the Sudoku cells read from top left to bottom right with '0' or '.' for empty cells. It must have a length of at least 81 characters, additional characters are ignored.
+.Pp
+The following options are available:
+.Bl -tag -width Ds
+.It Fl b Ar backend
+Backend, possible values are:
+.Bl -tag -width Ds
+.It Cm dlx
+DLX Algorithm (default)
+.It Cm bt
+Backtracking
+.It Cm dumb
+Dumb eliminiation
+.El
+.Pp
+See
+.Sx BACKENDS
+for details.
+.It Fl h
+Print help message
+.It Fl p
+Print
+.Ar sudoku
+to stdout without solving
+.It Fl P
+Print in square form
+.El
+.Sh BACKENDS
+.Bl -tag -width Ds
+.It Cm dlx
+Treats the Sudoku as an exact cover problem that can be solved very efficiently with Donald Knuth's DLX algorithm. It finds all possible solutions.
+.It Cm bt
+A recursive backtracking algorithm. It starts filling the Sudoku with allowed numbers
+.Po
+ascending
+.Pc
+from top left to bottom right and in case of a conflict goes back to the last conflicting field, chooses the next possible number for that field and repeats. It only finds one possible solution.
+.It Cm dumb
+A
+.Po
+very
+.Pc
+dumb elimination solver that mimics a 'beginner' strategy of solving. It goes through the Sudoku and builds a list of all possible numbers that can be put in any empty field. If it finds a unique field
+.Po
+one where only one number remains
+.Pc
+it fills in that number and repeats the process. Hence, it finds a solution only for quite simple Sudokus.
+.El
+.Sh AUTHORS
+.An Adam Buechner
