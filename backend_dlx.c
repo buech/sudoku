@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "dlx.h"
 #include "print.h"
 
