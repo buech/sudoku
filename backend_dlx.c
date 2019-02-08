@@ -21,7 +21,6 @@ static void print_sol(dlx_t *d) {
       board[9 * (minRow->c->n / 9) + (minRow->c->n % 9)] = (minRow->r->c->n) % 9 + 1;
    }
 
-   //d->nsol > 1 ? printf("Solution %zu:\n", d->nsol) : puts("Solution:");
    print_board(board);
 }
 
