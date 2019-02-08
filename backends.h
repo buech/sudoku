@@ -8,7 +8,7 @@ enum Backend {
 };
 
 int solve_dlx(int *board);
-int solve_backtrack(int *board);
+int solve_backtracking(int *board);
 int solve_dumb(int *board);
 
 #endif

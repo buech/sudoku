@@ -34,9 +34,6 @@ static int search(int *board, int pos) {
    return 0;
 }
 
-int solve_backtrack(int *board) {
-   if (search(board, 0))
-      return 1;
-   else
-      return 0;
+int solve_backtracking(int *board) {
+   return search(board, 0);
 }

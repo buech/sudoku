@@ -109,7 +109,7 @@ handle_err:
          break;
 
       case BT:
-         nsol = solve_backtrack(board);
+         nsol = solve_backtracking(board);
          break;
 
       case DUMB:
