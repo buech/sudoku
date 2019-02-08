@@ -27,7 +27,6 @@ For help:
 ```
 $ ./solver -h
 ```
-The pretty-printer works the same.
 
 ## Backends
 
