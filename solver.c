@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
    // Set up print function pointer
    print_board = print_simple;
    int print = 0;
-   int backend;
+   int backend = DLX;
    int opt;
    while ((opt = getopt(argc, argv, "b:hpP")) != -1) {
       switch (opt) {
@@ -44,7 +44,6 @@ int main(int argc, char **argv) {
                backend = DUMB;
             else {
                fprintf(stderr, "WARNING: Unknown backend %s, using dlx\n", optarg);
-               backend = DLX;
             }
             break;
 
