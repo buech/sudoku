@@ -6,22 +6,20 @@ CPPFLAGS += -MMD
 LDFLAGS += -L$(CDLXDIR)
 LDLIBS += -lcdlx
 
-SRC = solver.c string_to_board.c
+SRC = solver.c string_to_board.c print.c
 SRC += backend_dlx.c
 SRC += backend_backtracking.c
 SRC += backend_dumb.c
 
 OBJ := $(SRC:.c=.o)
 
-all: solver pretty_print
+all: solver
 
 solver: $(OBJ)
-
-pretty_print: pretty_print.o string_to_board.o
 
 -include $(wildcard *.d)
 
 clean:
-	rm -f *.o *.d solver pretty_print
+	rm -f *.o *.d solver
 
 .PHONY: all clean

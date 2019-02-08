@@ -1,12 +1,7 @@
 #include <stdio.h>
 
 #include "dlx.h"
-
-static void print_board(int *board) {
-   for (int i = 0; i < 81; i++)
-      printf("%1d", board[i]);
-   putchar('\n');
-}
+#include "print.h"
 
 static void print_sol(dlx_t *d) {
    int board[81] = {0};

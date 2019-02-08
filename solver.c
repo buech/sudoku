@@ -6,12 +6,7 @@
 
 #include "string_to_board.h"
 #include "backends.h"
-
-static void print_board(int *board) {
-   for (int i = 0; i < 81; i++)
-      printf("%1d", board[i]);
-   putchar('\n');
-}
+#include "print.h"
 
 static void usage(char *program_name) {
    printf(
@@ -25,15 +20,20 @@ static void usage(char *program_name) {
 "                length of at least 81 characters, additional\n"
 "                characters are ignored\n"
 "optional arguments:\n"
-"  -h            Show this help message and exit\n"
 "  -b BACKEND    Backend (dlx/bt/dumb), default is dlx\n"
+"  -h            Show this help message and exit\n"
+"  -p            Print input to output without solving\n"
+"  -P            Print in square form\n"
    ,program_name);
 }
 
 int main(int argc, char **argv) {
+   // Set up print function pointer
+   print_board = print_simple;
+   int print = 0;
    int backend;
    int opt;
-   while ((opt = getopt(argc, argv, "hb:")) != -1) {
+   while ((opt = getopt(argc, argv, "b:hpP")) != -1) {
       switch (opt) {
          case 'b':
             if (!strcmp(optarg, "dlx"))
@@ -51,6 +51,14 @@ int main(int argc, char **argv) {
          case 'h':
             usage(argv[0]);
             return EXIT_SUCCESS;
+
+         case 'p':
+            print = 1;
+            break;
+
+         case 'P':
+            print_board = print_pretty;
+            break;
 
          case '?':
             return EXIT_FAILURE;
@@ -85,6 +93,11 @@ handle_err:
       return EXIT_FAILURE;
    } else if (err == 2) {
       fputs("WARNING: The sudoku has too many fields, additional fields will be ignored\n", stderr);
+   }
+
+   if (print) {
+      print_board(board);
+      return EXIT_SUCCESS;
    }
 
    // Number of solutions, though only DLX is able to find multiple solutions
