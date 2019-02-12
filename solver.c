@@ -23,7 +23,7 @@ static void usage(char *program_name) {
 "  -b BACKEND    Backend (dlx/bt/dumb), default is dlx\n"
 "  -h            Show this help message and exit\n"
 "  -p            Print input to output without solving\n"
-"  -P            Print in square form\n"
+"  -s            Print in square form\n"
    ,program_name);
 }
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
    int print = 0;
    int backend = DLX;
    int opt;
-   while ((opt = getopt(argc, argv, "b:hpP")) != -1) {
+   while ((opt = getopt(argc, argv, "b:hps")) != -1) {
       switch (opt) {
          case 'b':
             if (!strcmp(optarg, "dlx"))
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
             print = 1;
             break;
 
-         case 'P':
+         case 's':
             print_board = print_pretty;
             break;
 
