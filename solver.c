@@ -26,7 +26,7 @@ static void usage(char *program_name) {
    ,program_name);
 }
 
-int string_to_board(int *board, char *string) {
+static int string_to_board(int *board, char *string) {
    int err = 0;
    size_t len = strlen(string);
    if (len < 81) {
