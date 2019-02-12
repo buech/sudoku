@@ -6,7 +6,7 @@ CPPFLAGS += -MMD
 LDFLAGS += -L$(CDLXDIR)
 LDLIBS += -lcdlx
 
-SRC = solver.c string_to_board.c print.c
+SRC = solver.c print.c
 SRC += backend_dlx.c
 SRC += backend_backtracking.c
 SRC += backend_dumb.c
